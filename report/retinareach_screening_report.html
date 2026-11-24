@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RetinaReach Screening Report - RC-20260929-1042</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary-blue: #0284c7;
+    --primary-dark: #0f4c81;
+    --navy-header: #0a2540;
+    --navy-footer: #08203e;
+    --section-header-bg: #e0f2fe;
+    --section-border: #bae6fd;
+    --card-bg: #f8fafc;
+    --border-color: #cbd5e1;
+    --text-dark: #0f172a;
+    --text-muted: #475569;
+    --danger-red: #ef4444;
+    --danger-bg: #fff1f2;
+    --danger-border: #fecdd3;
+    --danger-text: #9f1239;
+    --success-green: #10b981;
+    --success-bg: #f0fdf4;
+    --success-border: #bbf7d0;
+    --success-text: #166534;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #e2e8f0;
+    color: var(--text-dark);
+    font-size: 11px;
+    line-height: 1.4;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Page wrapper for A4 layout */
+  .report-page {
+    width: 210mm;
+    min-height: 297mm;
+    max-height: 297mm;
+    margin: 15px auto;
+    background: #ffffff;
+    padding: 12mm 14mm 8mm 14mm;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  @media print {
+    body {
+      background: none;
+      margin: 0;
+      padding: 0;
+    }
+    .report-page {
+      margin: 0;
+      padding: 10mm 12mm 6mm 12mm;
+      width: 100%;
+      height: 100vh;
+      max-height: 100vh;
+      box-shadow: none;
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+    .no-print {
+      display: none !important;
+    }
+  }
+
+  /* Action toolbar at top for preview */
+  .action-bar {
+    width: 210mm;
+    margin: 15px auto 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0f172a;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: white;
+  }
+  .action-btn {
+    background: #0284c7;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s;
+  }
+  .action-btn:hover {
+    background: #0369a1;
+  }
+
+  /* Header Component */
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #0284c7;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .brand-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-eye-icon {
+    width: 44px;
+    height: 44px;
+  }
+  .brand-text h1 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0284c7;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .brand-text h1 span {
+    color: #0284c7;
+  }
+  .brand-subhead {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #0c4a6e;
+    margin-bottom: 1px;
+  }
+  .brand-tagline {
+    font-size: 9px;
+    color: #0369a1;
+    font-weight: 600;
+  }
+  .header-meta {
+    text-align: left;
+    font-size: 10.5px;
+    background: #f0f9ff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border-left: 3px solid #0284c7;
+  }
+  .header-meta table td {
+    padding: 1px 4px;
+  }
+  .header-meta .meta-label {
+    font-weight: 600;
+    color: #334155;
+  }
+  .header-meta .meta-val {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  /* Layout Grids */
+  .grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  /* Section Box */
+  .section-card {
+    border: 1px solid #bae6fd;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #ffffff;
+    margin-bottom: 8px;
+  }
+  .section-header {
+    background: #e0f2fe;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 11px;
+    color: #0369a1;
+    border-bottom: 1px solid #bae6fd;
+  }
+  .section-header .sec-icon {
+    width: 18px;
+    height: 18px;
+    background: #0284c7;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  .section-body {
+    padding: 6px 8px;
+  }
+
+  /* Key-Value Detail Table */
+  .detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+  }
+  .detail-table tr td {
+    padding: 2.5px 3px;
+    vertical-align: top;
+  }
+  .detail-table .col-lbl {
+    width: 38%;
+    font-weight: 600;
+    color: #475569;
+  }
+  .detail-table .col-sep {
+    width: 4%;
+    color: #64748b;
+    font-weight: bold;
+  }
+  .detail-table .col-val {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  /* Examination & Findings Tables */
+  .exam-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    text-align: left;
+  }
+  .exam-table th {
+    background: #f0f9ff;
+    color: #0369a1;
+    font-weight: 700;
+    padding: 4px 6px;
+    border-bottom: 1px solid #cbd5e1;
+  }
+  .exam-table td {
+    padding: 3.5px 6px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+  }
+  .exam-table tr:last-child td {
+    border-bottom: none;
+  }
+  .exam-table td:nth-child(1) {
+    font-weight: 600;
+    color: #334155;
+    width: 40%;
+  }
+  .exam-table td:nth-child(2), .exam-table td:nth-child(3) {
+    font-weight: 500;
+  }
+
+  /* Retinal Images Gallery */
+  .retinal-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .image-box {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    overflow: hidden;
+    text-align: center;
+    background: #000;
+  }
+  .img-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .img-caption {
+    background: #f8fafc;
+    color: #1e293b;
+    font-size: 8.5px;
+    font-weight: 600;
+    padding: 4px 2px;
+    border-top: 1px solid #cbd5e1;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Disease Info & Symptoms */
+  .disease-info-text {
+    font-size: 9.5px;
+    color: #334155;
+    line-height: 1.35;
+    margin-bottom: 5px;
+  }
+  .symptoms-title {
+    font-weight: 700;
+    color: #0369a1;
+    font-size: 9.5px;
+    margin-bottom: 3px;
+  }
+  .symptoms-list {
+    list-style-type: disc;
+    padding-left: 14px;
+    font-size: 9px;
+    color: #334155;
+  }
+  .symptoms-list li {
+    margin-bottom: 2px;
+  }
+
+  /* Impression Highlight Badges */
+  .impression-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .imp-badge {
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .imp-badge.danger {
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+    color: var(--danger-text);
+  }
+  .imp-badge.success {
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+    color: var(--success-text);
+  }
+  .imp-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .imp-badge.danger .imp-icon {
+    background: #ef4444;
+    color: white;
+  }
+  .imp-badge.success .imp-icon {
+    background: #10b981;
+    color: white;
+  }
+  .imp-text-group .imp-eye {
+    font-weight: 700;
+    font-size: 9px;
+    margin-bottom: 1px;
+  }
+  .imp-text-group .imp-diag {
+    font-weight: 700;
+    font-size: 10.5px;
+  }
+
+  /* PAGE 2 SPECIFIC STYLES */
+  .doctor-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .signature-box {
+    text-align: center;
+    padding-right: 20px;
+  }
+  .sig-img {
+    max-height: 42px;
+    max-width: 140px;
+  }
+  .cursive-signature {
+    font-family: 'Caveat', cursive, sans-serif;
+    font-size: 26px;
+    color: #0f172a;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .sig-label {
+    font-size: 9px;
+    font-weight: 600;
+    color: #475569;
+    border-top: 1px solid #94a3b8;
+    padding-top: 2px;
+    margin-top: 2px;
+  }
+
+  /* Numbered Recommendations */
+  .rec-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .rec-badge {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #0284c7;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  .rec-badge.danger {
+    background: #ef4444;
+  }
+  .rec-content .rec-title {
+    font-weight: 700;
+    color: #0f172a;
+    font-size: 10px;
+    margin-bottom: 1px;
+  }
+  .rec-content .rec-desc {
+    font-size: 9.5px;
+    color: #334155;
+    line-height: 1.35;
+  }
+  .rec-content ul {
+    padding-left: 12px;
+    margin-top: 2px;
+    font-size: 9px;
+  }
+
+  /* Diet Plan */
+  .diet-subtitle {
+    font-weight: 700;
+    color: #0369a1;
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+  .diet-group {
+    margin-bottom: 5px;
+  }
+  .diet-heading {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    font-size: 9.5px;
+    margin-bottom: 2px;
+  }
+  .diet-heading.inc { color: #15803d; }
+  .diet-heading.lmt { color: #b91c1c; }
+  .diet-heading.hyd { color: #0284c7; }
+  .diet-list {
+    list-style-type: disc;
+    padding-left: 16px;
+    font-size: 9px;
+    color: #334155;
+    line-height: 1.35;
+  }
+  .diet-tailored-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 5px;
+    padding: 5px 8px;
+    margin-top: 5px;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .diet-tailored-box .leaf-icon {
+    color: #16a34a;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .diet-tailored-box p {
+    font-size: 8.5px;
+    color: #14532d;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  /* Important Notes & QR code footer area */
+  .notes-list {
+    list-style-type: disc;
+    padding-left: 14px;
+    font-size: 8.5px;
+    color: #334155;
+    line-height: 1.35;
+  }
+  .notes-list li {
+    margin-bottom: 2px;
+  }
+
+  .p2-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 4px;
+    padding: 0 4px;
+  }
+  .qr-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .qr-code-box {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 2px;
+    background: #fff;
+  }
+  .qr-label {
+    font-size: 8.5px;
+    font-weight: 600;
+    color: #0369a1;
+    line-height: 1.2;
+    max-width: 130px;
+  }
+  .vision-slogan {
+    font-family: 'Caveat', cursive, sans-serif;
+    font-size: 20px;
+    color: #0284c7;
+    font-weight: 700;
+    text-align: right;
+  }
+  .auth-stamp {
+    font-size: 9px;
+    font-weight: 700;
+    color: #0369a1;
+    text-align: right;
+  }
+
+  /* Document Footer Bar */
+  .doc-footer {
+    background: var(--navy-footer);
+    color: #ffffff;
+    padding: 5px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    font-weight: 600;
+    border-radius: 3px;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="action-bar no-print">
+  <div>
+    <strong>RetinaReach Report Generated</strong> &bull; Patient: Lakshmi B (RC-20260929-1042)
+  </div>
+  <div>
+    <button class="action-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- PAGE 1 OF 2 -->
+<!-- ========================================================================= -->
+<div class="report-page">
+  <div>
+    <!-- Top Header -->
+    <header class="report-header">
+      <div class="brand-logo-area">
+        <svg class="brand-eye-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="50" cy="50" rx="46" ry="26" stroke="#0284c7" stroke-width="6"/>
+          <circle cx="50" cy="50" r="17" fill="#0284c7"/>
+          <circle cx="50" cy="50" r="7" fill="#ffffff"/>
+          <path d="M 12 50 Q 50 15 88 50" stroke="#0369a1" stroke-width="4" fill="none"/>
+        </svg>
+        <div class="brand-text">
+          <h1>Retina<span>Reach</span></h1>
+          <div class="brand-subhead">AI Powered Diabetic Retinopathy Screening</div>
+          <div class="brand-tagline">Early Detection | Better Vision | Healthier Tomorrow</div>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div style="font-weight:800; color:#0369a1; font-size:11px; margin-bottom:2px;">Diabetic Retinopathy Screening Report</div>
+        <table>
+          <tr><td class="meta-label">Report ID</td><td class="col-sep">:</td><td class="meta-val">RC-20260929-1042</td></tr>
+          <tr><td class="meta-label">Visit Date</td><td class="col-sep">:</td><td class="meta-val">29 Sep 2026</td></tr>
+          <tr><td class="meta-label">Generated On</td><td class="col-sep">:</td><td class="meta-val">29 Sep 2026, 04:01 AM</td></tr>
+        </table>
+      </div>
+    </header>
+
+    <!-- Grid: Patient Details & Clinical History -->
+    <div class="grid-2col">
+      <!-- 1. Patient Details -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="sec-icon">&#128100;</span>
+          <span>1. Patient Details</span>
+        </div>
+        <div class="section-body">
+          <table class="detail-table">
+            <tr><td class="col-lbl">Patient ID</td><td class="col-sep">:</td><td class="col-val">RC-20260929-1042</td></tr>
+            <tr><td class="col-lbl">Name</td><td class="col-sep">:</td><td class="col-val">Lakshmi B</td></tr>
+            <tr><td class="col-lbl">Age / Gender</td><td class="col-sep">:</td><td class="col-val">62 years / Female</td></tr>
+            <tr><td class="col-lbl">Phone Number</td><td class="col-sep">:</td><td class="col-val">9876543210</td></tr>
+            <tr><td class="col-lbl">Address</td><td class="col-sep">:</td><td class="col-val">12, East Street, Vellore Village, Tiruvannamalai District - 606601</td></tr>
+            <tr><td class="col-lbl">Date of Visit</td><td class="col-sep">:</td><td class="col-val">29 Sep 2026</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- 2. Clinical History -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="sec-icon">&#128203;</span>
+          <span>2. Clinical History</span>
+        </div>
+        <div class="section-body">
+          <table class="detail-table">
+            <tr><td class="col-lbl">Diabetes Status</td><td class="col-sep">:</td><td class="col-val">Yes</td></tr>
+            <tr><td class="col-lbl">Duration of Diabetes</td><td class="col-sep">:</td><td class="col-val">8 years</td></tr>
+            <tr><td class="col-lbl">Hypertension</td><td class="col-sep">:</td><td class="col-val">Yes</td></tr>
+            <tr><td class="col-lbl">Previous Eye Disease</td><td class="col-sep">:</td><td class="col-val">No known condition</td></tr>
+            <tr><td class="col-lbl">Previous Eye Surgery</td><td class="col-sep">:</td><td class="col-val">No</td></tr>
+            <tr><td class="col-lbl">Current Eye Treatment</td><td class="col-sep">:</td><td class="col-val">Metformin, Telmisartan (as advised by physician)</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Eye Examination -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="sec-icon">&#128065;</span>
+        <span>3. Eye Examination</span>
+      </div>
+      <div class="section-body" style="padding:0;">
+        <table class="exam-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Right Eye (OD)</th>
+              <th>Left Eye (OS)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Visual Acuity (VA)</td>
+              <td>6/9</td>
+              <td>6/9</td>
+            </tr>
+            <tr>
+              <td>Intraocular Pressure (IOP)</td>
+              <td>14 mmHg</td>
+              <td>15 mmHg</td>
+            </tr>
+            <tr>
+              <td>Image Quality</td>
+              <td>Good</td>
+              <td>Good</td>
+            </tr>
+            <tr>
+              <td>Fundus Findings</td>
+              <td>Microaneurysms, few hemorrhages, exudates</td>
+              <td>No DR</td>
+            </tr>
+            <tr>
+              <td>DR Grade</td>
+              <td><strong style="color:#b91c1c">Mild NPDR</strong></td>
+              <td><strong style="color:#15803d">No DR</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4. Retinal Images -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="sec-icon">&#128247;</span>
+        <span>4. Retinal Images</span>
+      </div>
+      <div class="section-body">
+        <div class="retinal-gallery">
+          <div class="image-box">
+            <div class="img-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMzAwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBzdHlsZT0iYmFja2dyb3VuZDojMDAwO2JvcmRlci1yYWRpdXM6NnB4O2Rpc3BsYXk6YmxvY2s7Ij4KICAgICAgPGRlZnM+CiAgICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJmdW5kdXNHcmFkX09EX1RydWUiIGN4PSI1MCUiIGN5PSI1MCUiIHI9IjUwJSI+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZWE1ODBjIi8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjYwJSIgc3RvcC1jb2xvcj0iI2MyNDEwYyIvPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSI4NSUiIHN0b3AtY29sb3I9IiM5YTM0MTIiLz4KICAgICAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQzMTQwNyIvPgogICAgICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJkaXNjR3JhZCIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNTAlIj4KICAgICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZWQ3YWEiLz4KICAgICAgICAgIDxzdG9wIG9mZnNldD0iNzAlIiBzdG9wLWNvbG9yPSIjZmRiYTc0Ii8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmOTczMTYiLz4KICAgICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgICA8L2RlZnM+CiAgICAgIDxjaXJjbGUgY3g9IjE1MCIgY3k9IjE1MCIgcj0iMTQwIiBmaWxsPSJ1cmwoI2Z1bmR1c0dyYWRfT0RfVHJ1ZSkiIC8+CiAgICAgIDwhLS0gT3B0aWMgRGlzYyAtLT4KICAgICAgPGNpcmNsZSBjeD0iNzUiIGN5PSIxNTAiIHI9IjI0IiBmaWxsPSJ1cmwoI2Rpc2NHcmFkKSIgb3BhY2l0eT0iMC45NSIvPgogICAgICA8Y2lyY2xlIGN4PSI3NSIgY3k9IjE1MCIgcj0iMTAiIGZpbGw9IiNmZmVkZDUiIG9wYWNpdHk9IjAuOCIvPgogICAgICA8IS0tIFJldGluYWwgVmVzc2VscyAtLT4KICAgICAgPHBhdGggZD0iTSA3NSAxNTAgUSAxMDUgMTAwIDE3MCA2MCBRIDIxMCA0MCAyNTAgNTAiIHN0cm9rZT0iIzdmMWQxZCIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgICAgPHBhdGggZD0iTSA3NSAxNTAgUSAxMTUgMjAwIDE4MCAyNDAgUSAyMjAgMjYwIDI2MCAyNTAiIHN0cm9rZT0iIzdmMWQxZCIgc3Ryb2tlLXdpZHRoPSI0LjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgICA8cGF0aCBkPSJNIDc1IDE1MCBRIDU1IDEyMCAzNSA5MCIgc3Ryb2tlPSIjOTkxYjFiIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgICA8cGF0aCBkPSJNIDc1IDE1MCBRIDU1IDE4MCAzNSAyMTAiIHN0cm9rZT0iIzk5MWIxYiIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgICAgPCEtLSBNYWN1bGEgLyBGb3ZlYSAtLT4KICAgICAgPGNpcmNsZSBjeD0iMTYwIiBjeT0iMTUwIiByPSIxOCIgZmlsbD0iIzdjMmQxMiIgb3BhY2l0eT0iMC40NSIvPgogICAgICA8Y2lyY2xlIGN4PSIxNjAiIGN5PSIxNTAiIHI9IjQiIGZpbGw9IiM0NTFhMDMiIG9wYWNpdHk9IjAuNiIvPgogICAgICAKICAgICAgICA8IS0tIE1pY3JvYW5ldXJ5c21zICYgSGVtb3JyaGFnZXMgLS0+CiAgICAgICAgPGNpcmNsZSBjeD0iMTYwIiBjeT0iMTEwIiByPSIzLjUiIGZpbGw9IiM3ZjFkMWQiIG9wYWNpdHk9IjAuOSIvPgogICAgICAgIDxjaXJjbGUgY3g9IjE3NSIgY3k9IjExOCIgcj0iMi41IiBmaWxsPSIjOTkxYjFiIiBvcGFjaXR5PSIwLjkiLz4KICAgICAgICA8Y2lyY2xlIGN4PSIxNDAiIGN5PSIxNDUiIHI9IjQiIGZpbGw9IiM3ZjFkMWQiIG9wYWNpdHk9IjAuODUiLz4KICAgICAgICA8ZWxsaXBzZSBjeD0iMTMwIiBjeT0iMTcwIiByeD0iNiIgcnk9IjMiIGZpbGw9IiNiOTFjMWMiIG9wYWNpdHk9IjAuOCIgdHJhbnNmb3JtPSJyb3RhdGUoLTIwIDEzMCAxNzApIi8+CiAgICAgICAgPCEtLSBIYXJkIEV4dWRhdGVzIC0tPgogICAgICAgIDxjaXJjbGUgY3g9IjE2NSIgY3k9IjE1NSIgcj0iMi41IiBmaWxsPSIjZmVmMDhhIiBvcGFjaXR5PSIwLjk1Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMTY4IiBjeT0iMTU4IiByPSIyIiBmaWxsPSIjZmVmMDhhIiBvcGFjaXR5PSIwLjk1Ii8+CiAgICAgICAgPGNpcmNsZSBjeD0iMTYyIiBjeT0iMTYyIiByPSIzIiBmaWxsPSIjZmVmOWMzIiBvcGFjaXR5PSIwLjkiLz4KICAgICAgICAKICAgIDwvc3ZnPg==" alt="Right Eye Fundus" /></div>
+            <div class="img-caption">Right Eye (OD) - Fundus Photograph</div>
+          </div>
+          <div class="image-box">
+            <div class="img-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMzAwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBzdHlsZT0iYmFja2dyb3VuZDojMDAwO2JvcmRlci1yYWRpdXM6NnB4O2Rpc3BsYXk6YmxvY2s7Ij4KICAgICAgPGRlZnM+CiAgICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJmdW5kdXNHcmFkX09TX0ZhbHNlIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI1MCUiPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VhNTgwYyIvPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiNjMjQxMGMiLz4KICAgICAgICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjOWEzNDEyIi8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MzE0MDciLz4KICAgICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iZGlzY0dyYWQiIGN4PSI1MCUiIGN5PSI1MCUiIHI9IjUwJSI+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmVkN2FhIi8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1jb2xvcj0iI2ZkYmE3NCIvPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZjk3MzE2Ii8+CiAgICAgICAgPC9yYWRpYWxHcmFkaWVudD4KICAgICAgPC9kZWZzPgogICAgICA8Y2lyY2xlIGN4PSIxNTAiIGN5PSIxNTAiIHI9IjE0MCIgZmlsbD0idXJsKCNmdW5kdXNHcmFkX09TX0ZhbHNlKSIgLz4KICAgICAgPCEtLSBPcHRpYyBEaXNjIC0tPgogICAgICA8Y2lyY2xlIGN4PSIyMjUiIGN5PSIxNTAiIHI9IjI0IiBmaWxsPSJ1cmwoI2Rpc2NHcmFkKSIgb3BhY2l0eT0iMC45NSIvPgogICAgICA8Y2lyY2xlIGN4PSIyMjUiIGN5PSIxNTAiIHI9IjEwIiBmaWxsPSIjZmZlZGQ1IiBvcGFjaXR5PSIwLjgiLz4KICAgICAgPCEtLSBSZXRpbmFsIFZlc3NlbHMgLS0+CiAgICAgIDxwYXRoIGQ9Ik0gMjI1IDE1MCBRIDI1NSAxMDAgMTcwIDYwIFEgMjEwIDQwIDI1MCA1MCIgc3Ryb2tlPSIjN2YxZDFkIiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgICA8cGF0aCBkPSJNIDIyNSAxNTAgUSAyNjUgMjAwIDE4MCAyNDAgUSAyMjAgMjYwIDI2MCAyNTAiIHN0cm9rZT0iIzdmMWQxZCIgc3Ryb2tlLXdpZHRoPSI0LjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgICA8cGF0aCBkPSJNIDIyNSAxNTAgUSAyMDUgMTIwIDE4NSA5MCIgc3Ryb2tlPSIjOTkxYjFiIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgICA8cGF0aCBkPSJNIDIyNSAxNTAgUSAyMDUgMTgwIDE4NSAyMTAiIHN0cm9rZT0iIzk5MWIxYiIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgICAgPCEtLSBNYWN1bGEgLyBGb3ZlYSAtLT4KICAgICAgPGNpcmNsZSBjeD0iMTQwIiBjeT0iMTUwIiByPSIxOCIgZmlsbD0iIzdjMmQxMiIgb3BhY2l0eT0iMC40NSIvPgogICAgICA8Y2lyY2xlIGN4PSIxNDAiIGN5PSIxNTAiIHI9IjQiIGZpbGw9IiM0NTFhMDMiIG9wYWNpdHk9IjAuNiIvPgogICAgICAKICAgIDwvc3ZnPg==" alt="Left Eye Fundus" /></div>
+            <div class="img-caption">Left Eye (OS) - Fundus Photograph</div>
+          </div>
+          <div class="image-box">
+            <div class="img-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMjAwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBzdHlsZT0iYmFja2dyb3VuZDojMDkwOTBiO2JvcmRlci1yYWRpdXM6NnB4O2Rpc3BsYXk6YmxvY2s7Ij4KICAgICAgPGRlZnM+CiAgICAgICAgPHBhdHRlcm4gaWQ9ImdyYWluIiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgICAgIDxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIwLjgiIGZpbGw9IiM1MjUyNWIiIG9wYWNpdHk9IjAuMyIvPgogICAgICAgIDwvcGF0dGVybj4KICAgICAgPC9kZWZzPgogICAgICA8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNncmFpbikiIC8+CiAgICAgIDwhLS0gUmV0aW5hbCBMYXllciBCYW5kcyAoT0NUIFNjYW4pIC0tPgogICAgICA8cGF0aCBkPSJNIDEwIDkwIFEgMTUwIDEyMCAyOTAgOTAiIHN0cm9rZT0iI2U0ZTRlNyIgc3Ryb2tlLXdpZHRoPSIyLjUiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuODUiLz4KICAgICAgPHBhdGggZD0iTSAxMCA5OCBRIDE1MCAxMjggMjkwIDk4IiBzdHJva2U9IiNhMWExYWEiIHN0cm9rZS13aWR0aD0iNSIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC40Ii8+CiAgICAgIDxwYXRoIGQ9Ik0gMTAgMTI1IFEgMTUwIDE0NSAyOTAgMTI1IiBzdHJva2U9IiNmNGY0ZjUiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC45Ii8+CiAgICAgIDxwYXRoIGQ9Ik0gMTAgMTM1IFEgMTUwIDE1MiAyOTAgMTM1IiBzdHJva2U9IiNmYmJmMjQiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC43NSIvPgogICAgICA8cGF0aCBkPSJNIDEwIDE0NSBRIDE1MCAxNjAgMjkwIDE0NSIgc3Ryb2tlPSIjZDRkNGQ4IiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNSIvPgogICAgICA8cGF0aCBkPSJNIDEwIDE2NSBRIDE1MCAxNzUgMjkwIDE2NSIgc3Ryb2tlPSIjNzE3MTdhIiBzdHJva2Utd2lkdGg9IjEyIiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjMiLz4KICAgICAgPCEtLSBGb3ZlYWwgRGVwcmVzc2lvbiAvIENvbnRvdXIgLS0+CiAgICAgIAogICAgICAgIDwhLS0gTWFjdWxhciBjeXN0cyAvIGVkZW1hIC0tPgogICAgICAgIDxlbGxpcHNlIGN4PSIxNTAiIGN5PSIxMTUiIHJ4PSIxNCIgcnk9IjkiIGZpbGw9IiMwMzA3MTIiIHN0cm9rZT0iIzljYTNhZiIgc3Ryb2tlLXdpZHRoPSIwLjgiLz4KICAgICAgICA8ZWxsaXBzZSBjeD0iMTMyIiBjeT0iMTIwIiByeD0iOCIgcnk9IjYiIGZpbGw9IiMwMzA3MTIiIHN0cm9rZT0iIzljYTNhZiIgc3Ryb2tlLXdpZHRoPSIwLjgiLz4KICAgICAgICA8ZWxsaXBzZSBjeD0iMTcwIiBjeT0iMTE4IiByeD0iMTAiIHJ5PSI3IiBmaWxsPSIjMDMwNzEyIiBzdHJva2U9IiM5Y2EzYWYiIHN0cm9rZS13aWR0aD0iMC44Ii8+CiAgICAgICAgCiAgICAgIDx0ZXh0IHg9IjE1MCIgeT0iMTkwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzE3MTdhIiBmb250LXNpemU9IjEwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+SEQgNS1MaW5lIFJhc3RlciBTY2FuPC90ZXh0PgogICAgPC9zdmc+" alt="Right Eye OCT" /></div>
+            <div class="img-caption">Right Eye (OD) - OCT (if available)</div>
+          </div>
+          <div class="image-box">
+            <div class="img-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMjAwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBzdHlsZT0iYmFja2dyb3VuZDojMDkwOTBiO2JvcmRlci1yYWRpdXM6NnB4O2Rpc3BsYXk6YmxvY2s7Ij4KICAgICAgPGRlZnM+CiAgICAgICAgPHBhdHRlcm4gaWQ9ImdyYWluIiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgICAgIDxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIwLjgiIGZpbGw9IiM1MjUyNWIiIG9wYWNpdHk9IjAuMyIvPgogICAgICAgIDwvcGF0dGVybj4KICAgICAgPC9kZWZzPgogICAgICA8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNncmFpbikiIC8+CiAgICAgIDwhLS0gUmV0aW5hbCBMYXllciBCYW5kcyAoT0NUIFNjYW4pIC0tPgogICAgICA8cGF0aCBkPSJNIDEwIDkwIFEgMTUwIDEyMCAyOTAgOTAiIHN0cm9rZT0iI2U0ZTRlNyIgc3Ryb2tlLXdpZHRoPSIyLjUiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuODUiLz4KICAgICAgPHBhdGggZD0iTSAxMCA5OCBRIDE1MCAxMjggMjkwIDk4IiBzdHJva2U9IiNhMWExYWEiIHN0cm9rZS13aWR0aD0iNSIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC40Ii8+CiAgICAgIDxwYXRoIGQ9Ik0gMTAgMTI1IFEgMTUwIDE0NSAyOTAgMTI1IiBzdHJva2U9IiNmNGY0ZjUiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC45Ii8+CiAgICAgIDxwYXRoIGQ9Ik0gMTAgMTM1IFEgMTUwIDE1MiAyOTAgMTM1IiBzdHJva2U9IiNmYmJmMjQiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC43NSIvPgogICAgICA8cGF0aCBkPSJNIDEwIDE0NSBRIDE1MCAxNjAgMjkwIDE0NSIgc3Ryb2tlPSIjZDRkNGQ4IiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNSIvPgogICAgICA8cGF0aCBkPSJNIDEwIDE2NSBRIDE1MCAxNzUgMjkwIDE2NSIgc3Ryb2tlPSIjNzE3MTdhIiBzdHJva2Utd2lkdGg9IjEyIiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjMiLz4KICAgICAgPCEtLSBGb3ZlYWwgRGVwcmVzc2lvbiAvIENvbnRvdXIgLS0+CiAgICAgIAogICAgICA8dGV4dCB4PSIxNTAiIHk9IjE5MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzcxNzE3YSIgZm9udC1zaXplPSIxMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPkhEIDUtTGluZSBSYXN0ZXIgU2NhbjwvdGV4dD4KICAgIDwvc3ZnPg==" alt="Left Eye OCT" /></div>
+            <div class="img-caption">Left Eye (OS) - OCT (if available)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid: 5. AI-Assisted Findings & 6. Disease Information -->
+    <div class="grid-2col">
+      <!-- 5. AI-Assisted Findings -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="sec-icon">&#9881;</span>
+          <span>5. AI-Assisted Findings (Percentage)</span>
+        </div>
+        <div class="section-body" style="padding:0;">
+          <table class="exam-table">
+            <thead>
+              <tr>
+                <th>Finding</th>
+                <th>Right Eye (OD) %</th>
+                <th>Left Eye (OS) %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Microaneurysms</td><td>72%</td><td>18%</td></tr>
+              <tr><td>Hemorrhages</td><td>64%</td><td>12%</td></tr>
+              <tr><td>Exudates</td><td>48%</td><td>8%</td></tr>
+              <tr><td>Macular Involvement</td><td>36%</td><td>5%</td></tr>
+              <tr><td>Vessel Abnormalities</td><td>22%</td><td>6%</td></tr>
+              <tr><td>Image Quality</td><td>Good</td><td>Good</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 6. Disease Information -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="sec-icon">&#8505;</span>
+          <span>6. Disease Information</span>
+        </div>
+        <div class="section-body">
+          <div style="font-weight:700; color:#0369a1; font-size:10px; margin-bottom:2px;">Diabetic Retinopathy (DR)</div>
+          <p class="disease-info-text">
+            Diabetic retinopathy is a complication of diabetes that affects the blood vessels in the retina. It can lead to vision loss if not detected and treated early.
+          </p>
+          <div class="symptoms-title">Common Symptoms</div>
+          <ul class="symptoms-list">
+            <li>Blurred vision</li>
+            <li>Floaters or spots</li>
+            <li>Difficulty seeing at night</li>
+            <li>Sudden changes in vision</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Screening Impression -->
+    <div class="section-card" style="margin-bottom:0;">
+      <div class="section-header">
+        <span class="sec-icon">&#9989;</span>
+        <span>7. Screening Impression</span>
+      </div>
+      <div class="section-body">
+        <div class="impression-container">
+          <!-- OD Badge -->
+          <div class="imp-badge danger">
+            <div class="imp-icon">!</div>
+            <div class="imp-text-group">
+              <div class="imp-eye">Right Eye (OD)</div>
+              <div class="imp-diag">Mild Non-Proliferative Diabetic Retinopathy (NPDR)</div>
+            </div>
+          </div>
+          <!-- OS Badge -->
+          <div class="imp-badge success">
+            <div class="imp-icon">&#10003;</div>
+            <div class="imp-text-group">
+              <div class="imp-eye">Left Eye (OS)</div>
+              <div class="imp-diag">No Diabetic Retinopathy Detected</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 1 Footer -->
+  <footer class="doc-footer">
+    <div>RetinaReach | AI Powered Diabetic Retinopathy Screening</div>
+    <div>Page 1 of 2</div>
+  </footer>
+</div>
+
+
+<!-- ========================================================================= -->
+<!-- PAGE 2 OF 2 -->
+<!-- ========================================================================= -->
+<div class="report-page">
+  <div>
+    <!-- Top Header -->
+    <header class="report-header">
+      <div class="brand-logo-area">
+        <svg class="brand-eye-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="50" cy="50" rx="46" ry="26" stroke="#0284c7" stroke-width="6"/>
+          <circle cx="50" cy="50" r="17" fill="#0284c7"/>
+          <circle cx="50" cy="50" r="7" fill="#ffffff"/>
+          <path d="M 12 50 Q 50 15 88 50" stroke="#0369a1" stroke-width="4" fill="none"/>
+        </svg>
+        <div class="brand-text">
+          <h1>Retina<span>Reach</span></h1>
+          <div class="brand-subhead">AI Powered Diabetic Retinopathy Screening</div>
+          <div class="brand-tagline">Early Detection | Better Vision | Healthier Tomorrow</div>
+        </div>
+      </div>
+      <div class="header-meta">
+        <table>
+          <tr><td class="meta-label">Report ID</td><td class="col-sep">:</td><td class="meta-val">RC-20260929-1042</td></tr>
+          <tr><td class="meta-label">Visit Date</td><td class="col-sep">:</td><td class="meta-val">29 Sep 2026</td></tr>
+          <tr><td class="meta-label">Generated On</td><td class="col-sep">:</td><td class="meta-val">29 Sep 2026, 04:01 AM</td></tr>
+        </table>
+      </div>
+    </header>
+
+    <!-- 8. Recommended Screening / Referral Centre -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="sec-icon">&#127973;</span>
+        <span>8. Recommended Screening / Referral Centre</span>
+      </div>
+      <div class="section-body">
+        <table class="detail-table">
+          <tr><td class="col-lbl" style="width:25%;">Camp Name</td><td class="col-sep">:</td><td class="col-val">Rural Eye Screening Camp - Kallakurichi</td></tr>
+          <tr><td class="col-lbl">Location</td><td class="col-sep">:</td><td class="col-val">Government Higher Secondary School, Vellore Village, Tiruvannamalai District</td></tr>
+          <tr><td class="col-lbl">Date</td><td class="col-sep">:</td><td class="col-val">15 Oct 2026</td></tr>
+          <tr><td class="col-lbl">Time</td><td class="col-sep">:</td><td class="col-val">9:00 AM - 4:00 PM</td></tr>
+          <tr><td class="col-lbl">Distance from Patient</td><td class="col-sep">:</td><td class="col-val">8.4 km</td></tr>
+          <tr><td class="col-lbl">Services</td><td class="col-sep">:</td><td class="col-val">Fundus Photography | DR Screening | Ophthalmologist Consultation</td></tr>
+          <tr><td class="col-lbl">Cost</td><td class="col-sep">:</td><td class="col-val"><span style="color:#15803d;font-weight:700;">Free</span></td></tr>
+          <tr><td class="col-lbl">Reason for Recommendation</td><td class="col-sep">:</td><td class="col-val">Nearest available camp with diabetic retinopathy screening facilities.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 9. Treated / Reviewed By -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="sec-icon">&#129658;</span>
+        <span>9. Treated / Reviewed By</span>
+      </div>
+      <div class="section-body doctor-section">
+        <table class="detail-table" style="width:65%;">
+          <tr><td class="col-lbl" style="width:30%;">Doctor Name</td><td class="col-sep">:</td><td class="col-val"><strong>Dr. S. Meenakshi</strong></td></tr>
+          <tr><td class="col-lbl">Qualification</td><td class="col-sep">:</td><td class="col-val">M.S. (Ophthalmology)</td></tr>
+          <tr><td class="col-lbl">Designation</td><td class="col-sep">:</td><td class="col-val">Consultant Ophthalmologist</td></tr>
+          <tr><td class="col-lbl">Hospital</td><td class="col-sep">:</td><td class="col-val">Aravind Eye Hospital, Tiruvannamalai</td></tr>
+          <tr><td class="col-lbl">Reg. No.</td><td class="col-sep">:</td><td class="col-val">TNMC 67845</td></tr>
+        </table>
+        <div class="signature-box">
+          <div class="cursive-signature">Dr. S. Meenakshi</div>
+          <div class="sig-label">Signature</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid: 10. Recommendation & 11. Diet Plan -->
+    <div class="grid-2col">
+      <!-- 10. Recommendation -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="sec-icon">&#128221;</span>
+          <span>10. Recommendation</span>
+        </div>
+        <div class="section-body">
+          <div class="rec-item">
+            <div class="rec-badge">&#10003;</div>
+            <div class="rec-content">
+              <div class="rec-title">1. Ophthalmologist Review</div>
+              <div class="rec-desc">Visit the ophthalmologist at the recommended camp for detailed evaluation and treatment plan.</div>
+            </div>
+          </div>
+
+          <div class="rec-item">
+            <div class="rec-badge">&#128197;</div>
+            <div class="rec-content">
+              <div class="rec-title">2. Follow-up Schedule</div>
+              <div class="rec-desc">Next screening in 6 months or earlier if symptoms worsen.</div>
+            </div>
+          </div>
+
+          <div class="rec-item">
+            <div class="rec-badge">&#128300;</div>
+            <div class="rec-content">
+              <div class="rec-title">3. Additional Tests (if required)</div>
+              <ul class="diet-list">
+                <li>OCT (if advised by doctor)</li><li>Follow-up fundus imaging.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rec-item">
+            <div class="rec-badge danger">!</div>
+            <div class="rec-content">
+              <div class="rec-title" style="color:#b91c1c;">4. Urgent Referral</div>
+              <div class="rec-desc">Immediate consultation if you experience sudden vision loss, severe pain, or increase in floaters.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. Diet Plan -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="sec-icon">&#127860;</span>
+          <span>11. Diet Plan</span>
+        </div>
+        <div class="section-body">
+          <div class="diet-subtitle">Diabetes-Friendly Diet Plan (Tailored to Your Report)</div>
+          
+          <div class="diet-group">
+            <div class="diet-heading inc">&#10004; Include</div>
+            <ul class="diet-list">
+              <li>Leafy greens, carrots, broccoli, beans</li><li>Whole grains (brown rice, oats, millets)</li><li>Lean protein (fish, eggs, legumes)</li><li>Healthy fats (nuts, olive oil)</li><li>Low-fat dairy</li>
+            </ul>
+          </div>
+
+          <div class="diet-group">
+            <div class="diet-heading lmt">&#10008; Limit</div>
+            <ul class="diet-list">
+              <li>White rice, refined flour, sweets, sugary drinks</li><li>Processed snacks, white bread, maida products</li><li>Fried and high-fat foods, junk food</li>
+            </ul>
+          </div>
+
+          <div class="diet-group">
+            <div class="diet-heading hyd">&#128167; Hydration</div>
+            <ul class="diet-list">
+              <li>Drink 8-10 glasses of water daily</li><li>Avoid sugary beverages</li>
+            </ul>
+          </div>
+
+          <div class="diet-tailored-box">
+            <span class="leaf-icon">&#127807;</span>
+            <p>Since you have mild NPDR in the right eye and diabetes with hypertension, a balanced, low-glycemic diet with controlled salt and sugar is important to slow progression and protect your vision.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid: 12. Camp Details & 13. Important Notes -->
+    <div class="grid-2col" style="margin-bottom:2px;">
+      <!-- 12. Camp Details -->
+      <div class="section-card" style="margin-bottom:0;">
+        <div class="section-header">
+          <span class="sec-icon">&#127957;</span>
+          <span>12. Camp Details</span>
+        </div>
+        <div class="section-body">
+          <table class="detail-table">
+            <tr><td class="col-lbl" style="width:32%;">Camp Name</td><td class="col-sep">:</td><td class="col-val">Rural Eye Screening Camp - Kallakurichi</td></tr>
+            <tr><td class="col-lbl">Location</td><td class="col-sep">:</td><td class="col-val">Government Higher Secondary School, Vellore Village, Tiruvannamalai District</td></tr>
+            <tr><td class="col-lbl">Date</td><td class="col-sep">:</td><td class="col-val">15 Oct 2026</td></tr>
+            <tr><td class="col-lbl">Time</td><td class="col-sep">:</td><td class="col-val">9:00 AM - 4:00 PM</td></tr>
+            <tr><td class="col-lbl">Organized By</td><td class="col-sep">:</td><td class="col-val">RetinaCare Outreach Team</td></tr>
+            <tr><td class="col-lbl">Contact</td><td class="col-sep">:</td><td class="col-val">1800-123-4567</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- 13. Important Notes -->
+      <div class="section-card" style="margin-bottom:0;">
+        <div class="section-header">
+          <span class="sec-icon">&#8505;</span>
+          <span>13. Important Notes</span>
+        </div>
+        <div class="section-body">
+          <ul class="notes-list">
+            <li>This report is generated using AI-assisted analysis and should be reviewed by a qualified ophthalmologist for final diagnosis and treatment plan.</li>
+            <li>Maintain regular follow-up and monitoring.</li>
+            <li>Keep your blood sugar, blood pressure and cholesterol under control.</li>
+            <li>This report is not a substitute for professional medical advice.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom QR Code, Slogan, and Stamp -->
+    <div class="p2-bottom-row">
+      <div class="qr-block">
+        <div class="qr-code-box">
+          <svg viewBox="0 0 100 100" width="100%" height="100%">
+            <!-- Simple QR Code Pattern Simulation -->
+            <rect width="100" height="100" fill="white"/>
+            <!-- Top-left Finder -->
+            <rect x="5" y="5" width="28" height="28" fill="black"/>
+            <rect x="9" y="9" width="20" height="20" fill="white"/>
+            <rect x="13" y="13" width="12" height="12" fill="black"/>
+            <!-- Top-right Finder -->
+            <rect x="67" y="5" width="28" height="28" fill="black"/>
+            <rect x="71" y="9" width="20" height="20" fill="white"/>
+            <rect x="75" y="13" width="12" height="12" fill="black"/>
+            <!-- Bottom-left Finder -->
+            <rect x="5" y="67" width="28" height="28" fill="black"/>
+            <rect x="9" y="71" width="20" height="20" fill="white"/>
+            <rect x="13" y="75" width="12" height="12" fill="black"/>
+            <!-- Inner Data bits -->
+            <rect x="40" y="10" width="6" height="6" fill="black"/>
+            <rect x="52" y="15" width="8" height="8" fill="black"/>
+            <rect x="40" y="28" width="8" height="5" fill="black"/>
+            <rect x="10" y="42" width="6" height="14" fill="black"/>
+            <rect x="25" y="42" width="8" height="8" fill="black"/>
+            <rect x="42" y="42" width="16" height="16" fill="black"/>
+            <rect x="68" y="42" width="8" height="8" fill="black"/>
+            <rect x="85" y="42" width="6" height="16" fill="black"/>
+            <rect x="40" y="68" width="8" height="8" fill="black"/>
+            <rect x="55" y="68" width="6" height="14" fill="black"/>
+            <rect x="72" y="68" width="14" height="6" fill="black"/>
+            <rect x="40" y="85" width="18" height="6" fill="black"/>
+            <rect x="68" y="82" width="12" height="10" fill="black"/>
+          </svg>
+        </div>
+        <div class="qr-label">Scan to view retinal images &amp; full report online</div>
+      </div>
+      <div>
+        <div class="vision-slogan">Clearer Vision<br>Brighter Future</div>
+        <div class="auth-stamp">Issued by Ophthalmologist</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 2 Footer -->
+  <footer class="doc-footer">
+    <div>RetinaReach | AI Powered Diabetic Retinopathy Screening</div>
+    <div>Page 2 of 2</div>
+  </footer>
+</div>
+
+</body>
+</html>

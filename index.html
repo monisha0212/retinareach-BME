@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abstract Eye - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="eye-poster.jpg">
+    <source src="eye.mp4" type="video/mp4">
+  </video>
+
+  <main class="content">
+    <div class="login-card" id="loginCard">
+      <div class="logo-area">
+        <div class="eye-icon"></div>
+        <h1>Visionary</h1>
+        <p>Enter your focus</p>
+      </div>
+
+      <!-- Role Quick-Select Tabs -->
+      <div class="role-tabs">
+        <button type="button" class="role-tab active" data-role="doctor">Doctor</button>
+        <button type="button" class="role-tab" data-role="trainee">Trainee</button>
+      </div>
+      
+      <form id="loginForm" autocomplete="off">
+        <div class="input-group">
+          <input type="text" id="username" required>
+          <label for="username">Username</label>
+        </div>
+        
+        <div class="input-group">
+          <input type="password" id="password" required>
+          <label for="password">Password</label>
+        </div>
+
+        <p class="status-msg" id="statusMsg"></p>
+        
+        <button type="submit" class="login-btn">Unlock</button>
+        
+        <div class="footer-links">
+          <a href="#" id="fillCredentialsLink">Auto-fill selected role</a>
+          <span>•</span>
+          <a href="#" id="resetFormLink">Clear</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const USERS = {
+      "dr.vision": {
+        password: "Doc@2026",
+        roleKey: "doctor",
+        roleLabel: "Doctor",
+        email: "dr.vision@retinareach.org"
+      },
+      "trainee.eye": {
+        password: "Trainee@2026",
+        roleKey: "trainee",
+        roleLabel: "Trainee",
+        email: "trainee.eye@retinareach.org"
+      }
+    };
+
+    let selectedRole = "doctor";
+    const roleTabs = document.querySelectorAll(".role-tab");
+    const loginForm = document.getElementById("loginForm");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const statusMsg = document.getElementById("statusMsg");
+    const fillCredentialsLink = document.getElementById("fillCredentialsLink");
+    const resetFormLink = document.getElementById("resetFormLink");
+
+    roleTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        roleTabs.forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+        selectedRole = tab.dataset.role;
+        statusMsg.textContent = "";
+        statusMsg.className = "status-msg";
+      });
+    });
+
+    fillCredentialsLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (selectedRole === "doctor") {
+        usernameInput.value = "dr.vision";
+        passwordInput.value = "Doc@2026";
+      } else {
+        usernameInput.value = "trainee.eye";
+        passwordInput.value = "Trainee@2026";
+      }
+      statusMsg.textContent = `Filled ${selectedRole.toUpperCase()} credentials`;
+      statusMsg.className = "status-msg info";
+    });
+
+    resetFormLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      loginForm.reset();
+      statusMsg.textContent = "";
+      statusMsg.className = "status-msg";
+    });
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const uname = usernameInput.value.trim().toLowerCase();
+      const pwd = passwordInput.value;
+
+      const account = USERS[uname];
+      if (!account || account.password !== pwd) {
+        statusMsg.textContent = "Invalid username or password.";
+        statusMsg.className = "status-msg error";
+        return;
+      }
+
+      try {
+        sessionStorage.setItem("rr_role", account.roleLabel);
+        sessionStorage.setItem("rr_email", account.email);
+      } catch (err) {}
+
+      const targetUrl = `dashboard.html?role=${encodeURIComponent(account.roleLabel)}&email=${encodeURIComponent(account.email)}`;
+      window.location.href = targetUrl;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+datasets/
+models/
+backend/
+report/
+RetinaReach_Visionary_Login.zip
+eye.mp4
+.env
+.env.local
+server.py
+__pycache__/
+*.pyc
